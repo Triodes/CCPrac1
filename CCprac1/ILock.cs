@@ -40,4 +40,25 @@ namespace CCprac1
             }
         }
     }
+
+    class mySpinLock : ILock
+    {
+        SpinLock lockObj;
+        public mySpinLock()
+        {
+            lockObj = new SpinLock();
+        }
+
+        public bool Lock()
+        {
+            bool temp = false;
+            lockObj.Enter(ref temp);
+            return temp;
+        }
+
+        public void Unlock()
+        {
+            lockObj.Exit();
+        }
+    }
 }
