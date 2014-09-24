@@ -83,15 +83,17 @@ namespace CCprac1
             }
         }
 
+        delegate void NoReturn1Arg(object a);
+
         //creates and starts threads in proper mode
-        private void StartThreads(Action<object> mode)
+        private void StartThreads(ParameterizedThreadStart mode)
         {
             Thread[] t = new Thread[nThreads];
 
             //create threads
             for (int i = 0; i < nThreads; i++)
             {
-                t[i] = new Thread(new ParameterizedThreadStart(mode));
+                t[i] = new Thread(mode);
             }
 
             //start threads
