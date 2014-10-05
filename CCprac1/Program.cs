@@ -83,8 +83,6 @@ namespace CCprac1
             }
         }
 
-        delegate void NoReturn1Arg(object a);
-
         //creates and starts threads in proper mode
         private void StartThreads(ParameterizedThreadStart mode)
         {
