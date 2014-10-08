@@ -41,7 +41,7 @@ namespace CCprac1
 
             Program p = new Program(input);
 
-            //Console.ReadLine();
+            Console.ReadLine();
         }
 
         public Program(string[] input)
@@ -111,9 +111,11 @@ namespace CCprac1
         public void SearchMode(object id)
         {
             int i = intervals[(int)id];
-            while (i < intervals[(int)id + 1] && !foundIt)
+            int j = intervals[(int)id + 1];
+            SHA1 sha = SHA1.Create();
+            while (i < j && !foundIt)
             {
-                if (MTest(i) && ShaTest(i))
+                if (MTest(i) && ShaTest(i, sha))
                 {
                     foundIt = true;
                     Console.WriteLine(i);
@@ -126,7 +128,8 @@ namespace CCprac1
         public void CountMode(object id)
         {
             int i = intervals[(int)id];
-            while (i < intervals[(int)id + 1])
+            int j = intervals[(int)id + 1];
+            while (i < j)
             {
                 if (MTest(i))
                 {
@@ -142,7 +145,8 @@ namespace CCprac1
         public void ListMode(object id)
         {
             int i = intervals[(int)id];
-            while (i < intervals[(int)id + 1])
+            int j = intervals[(int)id + 1];
+            while (i < j)
             {
                 if (MTest(i))
                 {
@@ -156,9 +160,8 @@ namespace CCprac1
         }
 
         //compares SHA1 of i with global hash
-        public bool ShaTest(int i)
+        public bool ShaTest(int i, SHA1 sha)
         {
-            SHA1 sha = SHA1.Create();
             byte[] hashArray = sha.ComputeHash(Encoding.ASCII.GetBytes(i.ToString()));
             string newHash = "";
             for (int hashPos = 0; hashPos < hashArray.Length; hashPos++)
@@ -194,10 +197,12 @@ namespace CCprac1
             int rem = highEx - intervals[index];
             for (int i = rem; i > 0; i--)
             {
-                intervals[index] += rem;
+                intervals[index] += i;
                 index--;
             }
             return intervals;
         }
+
+
     }
 }
