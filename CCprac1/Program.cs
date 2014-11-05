@@ -170,13 +170,13 @@ namespace CCprac1
         }
 
         //the m-test
-        public bool MTest(int obj)
+        public bool MTest(int toTest)
         {
             int result = 0, counter = 1;
-            while (obj != 0)
+            while (toTest != 0) 
             {
-                result += (obj % 10) * counter;
-                obj /= 10;
+                result += (toTest % 10) * counter;
+                toTest /= 10;
                 counter++;
             }
 
